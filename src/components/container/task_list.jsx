@@ -3,6 +3,7 @@ import TaskComponent from '../pure/task';
 import { Task } from '../../models/task.class';
 import { LEVELS } from '../../models/levels.enum';
 import '../../styles/task.scss';
+import TaskForm from '../pure/forms/taskForm';
 
 const TaskListComponent = () => {
 
@@ -19,13 +20,31 @@ const TaskListComponent = () => {
         console.log("Modificacion de tareas");
         setLoading(false);
         return () => {
-            console.log("Taski list componente va a ser unmount");
+            console.log("Task list componente va a ser unmount");
         };
     }, [tasks]);
 
-    const changeCompleted = (id) => {
-        console.log("TODO: Cambia el estado de una tarea");
+    
+    function completeTask(task){
+        const index = tasks.indexOf(task);
+        const tempTask = [...tasks];
+        tempTask[index].completed = !tempTask[index].completed;
+        setTasks(tempTask);
     }
+
+    function deleteTask(task) {
+        const index = tasks.indexOf(task);
+        const tempTask = [...tasks];
+        tempTask.splice(index,1);
+        setTasks(tempTask);
+    }
+
+    function addTask(task) {
+        const tempTask = [...tasks];
+        tempTask.push(task);
+        setTasks(tempTask);
+    }
+
 
     return (
         <div>
@@ -49,14 +68,14 @@ const TaskListComponent = () => {
                             <tbody>
                                 {tasks.map( (task,index) => {
                                     return (
-                                        <TaskComponent key={index} task={task}/>
+                                        <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask} addTask={addTask}/>
                                     )
                                 }
                                 )}
                             </tbody>
                         </table>
-
                     </div>
+                    <TaskForm add={addTask}/>
                 </div>
             </div>
         </div>

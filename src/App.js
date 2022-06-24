@@ -1,18 +1,14 @@
 
 import './App.css';
-import ContactA from './components/pure/contact_a';
-import { Contact } from './models/contact.class';
+import Clock from './components/pure/clock';
 
 function App() {
 
-  const contacto = new Contact("Nombre","Apellido","Email@mail.com",false);
 
   return (
     <div className="App">
-      <header className="App-Header">
-        {/* Componente de Contacto */}
-        <ContactA contact={contacto}/>
-      </header>
+      <h1>Clock:</h1>
+      <Clock/>
     </div>
 
   );

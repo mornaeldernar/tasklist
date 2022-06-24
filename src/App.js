@@ -1,14 +1,13 @@
 
 import './App.css';
-import Clock from './components/pure/clock';
+import TaskListComponent from './components/container/task_list';
 
 function App() {
 
 
   return (
     <div className="App">
-      <h1>Clock:</h1>
-      <Clock/>
+      <TaskListComponent />
     </div>
 
   );

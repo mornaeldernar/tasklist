@@ -19,7 +19,7 @@ const Clock = () => {
         return () => {
             clearInterval(timerID)
         };
-    }, []);
+    });
 
     const tick = () => {
         const prevState = state;

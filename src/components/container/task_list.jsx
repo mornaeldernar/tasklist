@@ -4,6 +4,7 @@ import { Task } from '../../models/task.class';
 import { LEVELS } from '../../models/levels.enum';
 import '../../styles/task.scss';
 import TaskForm from '../pure/forms/taskForm';
+import TaskFormik from '../pure/forms/taskFormik';
 
 const TaskListComponent = () => {
 
@@ -18,7 +19,9 @@ const TaskListComponent = () => {
     //Control del ciclo de vida del componente
     useEffect(() => {
         console.log("Modificacion de tareas");
-        setLoading(false);
+        setTimeout(()=>{
+            setLoading(false);
+        },1000);
         return () => {
             console.log("Task list componente va a ser unmount");
         };
@@ -46,6 +49,44 @@ const TaskListComponent = () => {
     }
 
 
+    const Table = () => {
+        return (
+        
+            <table className='table'>
+                <thead className='thead-dark'>
+                    <tr>
+                        <th scope='col'>Titulo</th>
+                        <th scope='col'>Descripción</th>
+                        <th scope='col'>Prioridad</th>
+                        <th scope='col'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tasks.map( (task,index) => {
+                        return (
+                            <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask} addTask={addTask}/>
+                        )
+                    }
+                    )}
+                </tbody>
+            </table>
+        );
+    }
+
+    
+    let taskTable;
+
+    if(tasks.length > 0 ){
+        taskTable = <Table></Table>
+    }else {
+        taskTable = (
+        <div>
+            <h3>No tienes tareas</h3>
+            <h4>Favor de crear una nueva tarea</h4>
+        </div>
+        )
+    }
+
     return (
         <div>
             <div className='col-12'>
@@ -56,26 +97,9 @@ const TaskListComponent = () => {
                         </h5>
                     </div>
                     <div className='card-body' data-mdb-perfect-scrollbar='true' style={ { position:'relative', height:'400px' } }>
-                        <table className='table'>
-                            <thead className='thead-dark'>
-                                <tr>
-                                    <th scope='col'>Titulo</th>
-                                    <th scope='col'>Descripción</th>
-                                    <th scope='col'>Prioridad</th>
-                                    <th scope='col'>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tasks.map( (task,index) => {
-                                    return (
-                                        <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask} addTask={addTask}/>
-                                    )
-                                }
-                                )}
-                            </tbody>
-                        </table>
+                        { loading ? (<div><p>Cargando...</p><p><i className='bi bi-arrow-repeat' style={{color:'grey', fontSize:'large'}}></i></p></div>) : taskTable }
                     </div>
-                    <TaskForm add={addTask}/>
+                    <TaskFormik add={addTask} />
                 </div>
             </div>
         </div>

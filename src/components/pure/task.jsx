@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Task } from '../../models/task.class';
+// Importamos los modelos
+import { LEVELS } from '../../models/levels.enum';
 // Importamos la hoja de estilos de task.scss
 import '../../styles/task.scss';
-import { LEVELS } from '../../models/levels.enum';
 
-const TaskComponent = ({ task, complete, deleteTask, addTask }) => {
+const TaskComponent = ({ task, complete, deleteTask }) => {
 
     useEffect(() => {
         console.log('Tarea Creada')
@@ -14,6 +15,17 @@ const TaskComponent = ({ task, complete, deleteTask, addTask }) => {
         };
     }, [task]);
 
+    const taskCompleted = {
+        backgoundColor: 'tomato',
+        color: 'gray',
+        fontWeight: 'bold',
+        textDecoration : 'line-through'
+    }
+
+    const taskPending = {
+        fontWeight: 'bold',
+        color: 'tomato'
+    }
     /**
      * 
      * @returns badge dependiendo del task.level
@@ -56,7 +68,7 @@ const TaskComponent = ({ task, complete, deleteTask, addTask }) => {
     }
     
     return (
-        <tr className='fw-normal'>
+        <tr className="fw-normal" style={task.completed ?   taskCompleted : taskPending}>
             <th>
                 <span className='ms-2'>{ task.name }</span>
             </th>
@@ -78,8 +90,7 @@ const TaskComponent = ({ task, complete, deleteTask, addTask }) => {
 TaskComponent.propTypes = {
     task : PropTypes.instanceOf(Task).isRequired,
     complete: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
-    addTask: PropTypes.func.isRequired
+    deleteTask: PropTypes.func.isRequired
 };
 
 

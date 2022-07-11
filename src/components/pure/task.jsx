@@ -5,6 +5,7 @@ import { Task } from '../../models/task.class';
 import { LEVELS } from '../../models/levels.enum';
 // Importamos la hoja de estilos de task.scss
 import '../../styles/task.scss';
+import {  Link } from 'react-router-dom';
 
 const TaskComponent = ({ task, complete, deleteTask }) => {
 
@@ -79,6 +80,9 @@ const TaskComponent = ({ task, complete, deleteTask }) => {
                {taskLevelBadge()}
             </td>
             <td className='align-middle'>
+                
+                 <Link to="/Task/"><i className='bi bi-search' style={{color:'blue'}}></i></Link>
+                
                 {taskIconCompleted()}
                 <i onClick={ () => deleteTask(task) } className='bi-trash task-action' style={{color:'tomato', fontSize:'large'}}></i>
             </td>

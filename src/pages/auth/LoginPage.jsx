@@ -1,9 +1,12 @@
 import React from 'react';
+import LoginFormik from '../../components/pure/forms/loginFormik';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
     return (
         <div>
-            <h1>Login Pag</h1>
+            <LoginFormik />
+            <Link to="/register">Registrate</Link>
         </div>
     );
 }

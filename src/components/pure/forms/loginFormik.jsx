@@ -9,7 +9,7 @@ const loginSchema = Yup.object().shape(
     }
 );
 
-const LoginFormik = () => {
+const LoginFormik = ({ onSubmit }) => {
 
     /**
      * Como se inicializan los valores del form
@@ -27,9 +27,8 @@ const LoginFormik = () => {
                 validationSchema={loginSchema}
                 onSubmit={async (values) => {
                     await new Promise((r)=>setTimeout(r,500));
-                    alert(JSON.stringify(values,null,2));
                     // guardamos los daots en el localstorage
-                    localStorage.setItem('credentials',values);
+                    onSubmit(values);
                 }}  
             >
                 {/** obtenemos props desde Formik */}

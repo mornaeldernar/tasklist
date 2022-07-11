@@ -2,10 +2,13 @@ import React from 'react';
 import LoginFormik from '../../components/pure/forms/loginFormik';
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = ( { onSubmit }) => {
+    
+    
+
     return (
         <div>
-            <LoginFormik />
+            <LoginFormik onSubmit={(e) => onSubmit(e)} />
             <Link to="/register">Registrate</Link>
         </div>
     );

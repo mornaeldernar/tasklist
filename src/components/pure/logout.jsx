@@ -12,7 +12,7 @@ const Logout = ({onLoad}) => {
 
     return (
         <div>
-            <h1>Cerrando Sesion...</h1>
+            <h1>Cerrando Sesion ... </h1>
         </div>
     );
 }

@@ -7,14 +7,25 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import AppTaskLogin from './AppTaskLogin';
 import App from './App';
+// Redux Imports:
+import { Provider } from 'react-redux';
+// Inmport config Function of App Store
+import  { createAppAsyncStore, createAppStore } from './store/config/storeConfig';
+import AppReduxSaga from './AppReduxSaga';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    {/**<App />*/}
-    <App />
 
-  </React.StrictMode>
+//We create the app store
+//let appStore = createAppStore();
+let appAsyncStore = createAppAsyncStore();
+root.render(
+  <Provider store={ appAsyncStore }>
+    <React.StrictMode>
+      {/**<App />*/}
+      <AppReduxSaga />
+
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
